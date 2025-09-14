@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuNamespace.CharacterData
   characterName: "\u041C\u043E\u0440\u043A\u043E\u0432\u0438\u043D\u043E-\u0421\u043F\u0438\u0434\u0438\u043D\u0438"
-  characterSprite: {fileID: 21300000, guid: 924d762b148d2ef928c640ff77e5dad7, type: 3}
+  characterSprite: {fileID: 21300000, guid: 64f4700ad1e145ed38d8c32ebed728fe, type: 3}
   characterPrefab: {fileID: 3955908763455639209, guid: bc2e4bf6c3855f7609188fa84328a546, type: 3}
 --- !u!1 &248968099
 GameObject:
@@ -1078,7 +1078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuNamespace.CharacterData
   characterName: "\u0411\u0430\u043D\u0430\u043D\u0438\u043D\u043E-\u0410\u0441\u0441\u0430\u0441\u0438\u043D\u043E"
-  characterSprite: {fileID: 21300000, guid: e23391b7a7e7684a486fc1f43ee56734, type: 3}
+  characterSprite: {fileID: 21300000, guid: 26d2fc29330fca9188c90b8b07fd84b4, type: 3}
   characterPrefab: {fileID: 3388478698267118479, guid: 3fe45746fe10139e3953c43be9e0f133, type: 3}
 --- !u!1 &759447347
 GameObject:
@@ -3848,7 +3848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuNamespace.CharacterData
   characterName: "\u041B\u0443\u0447\u0438\u043D\u0438-\u041E\u0441\u043B\u0435\u043F\u0438\u043D\u0438"
-  characterSprite: {fileID: 21300000, guid: 0e59441fc1056a66a9024aecbaef4df3, type: 3}
+  characterSprite: {fileID: 21300000, guid: 2226565756e3fbb048af9ed0773b871f, type: 3}
   characterPrefab: {fileID: 5494591361954021148, guid: 649863cc13aa34c8eb5daa7fd8a5ffd8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
