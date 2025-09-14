@@ -1,4 +1,5 @@
 using System;
+using GameCore;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -17,6 +18,9 @@ namespace Characters
 
         public float jumpPower = 200f;
         private bool isGrounded = true;
+        /// <summary>
+        /// TODO: написать документацию для этой ебейшей хуйни
+        /// </summary>
         private bool inJump = false;
 
         protected Rigidbody2D Rb;
@@ -27,6 +31,8 @@ namespace Characters
         void Start()
         {
             Rb = GetComponent<Rigidbody2D>();
+            KeysManager.Instance.AddKey(KeysManager.Keys.Space, "[SPACE] - Прыжок");
+            KeysManager.Instance.AddKey(KeysManager.Keys.AD, "[A, D] - Перемещение влево/вправо");
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -36,6 +42,8 @@ namespace Characters
                 isGrounded = true;
                 inJump = false;
                 Rb.linearVelocity = Vector2.zero;
+                KeysManager.Instance.AddKey(KeysManager.Keys.Space, "[SPACE] - Прыжок");
+                KeysManager.Instance.AddKey(KeysManager.Keys.AD, "[A, D] - Перемещение влево/вправо");
             }
         }
 
@@ -69,6 +77,7 @@ namespace Characters
                 Rb.AddForce(jumpVector, ForceMode2D.Impulse);
 
                 isGrounded = false;
+                KeysManager.Instance.RemoveKey(KeysManager.Keys.AD);
                 return;
             }
 
@@ -96,6 +105,7 @@ namespace Characters
             Rb.linearVelocity = new Vector2(Rb.linearVelocity.x, jumpPower);
             isGrounded = false;
             inJump = true;
+            KeysManager.Instance.RemoveKey(KeysManager.Keys.Space);
         }
 
         /// <summary>
