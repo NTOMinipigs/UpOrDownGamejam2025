@@ -141,7 +141,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.3, y: 2.3, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1851806664990286850}
@@ -160,9 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6759833cedf145a2b288cf77aab47103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Characters.BananaCharacter
-  walkJumpForce: 149
-  walkJumpDistance: 120
-  jumpPower: 200
+  walkJumpForce: 75
+  walkJumpDistance: 80
+  jumpPower: 225
 --- !u!50 &4049901988998622728
 Rigidbody2D:
   serializedVersion: 5
