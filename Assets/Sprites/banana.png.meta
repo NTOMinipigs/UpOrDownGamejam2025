@@ -5,9 +5,6 @@ TextureImporter:
   - first:
       213: -9182177788924653191
     second: banana_0
-  - first:
-      213: -2087103546444680308
-    second: banana_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,10 +103,10 @@ TextureImporter:
       name: banana_0
       rect:
         serializedVersion: 2
-        x: 50
-        y: 134
-        width: 147
-        height: 117
+        x: 27
+        y: 27
+        width: 202
+        height: 202
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,28 +117,6 @@ TextureImporter:
       bones: []
       spriteID: 9711aa243f9529080800000000000000
       internalID: -9182177788924653191
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: banana_1
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 16
-        width: 50
-        height: 144
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c83f4b8e16e1903e0800000000000000
-      internalID: -2087103546444680308
       vertices: []
       indices: 
       edges: []
@@ -161,7 +136,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       banana_0: -9182177788924653191
-      banana_1: -2087103546444680308
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

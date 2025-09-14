@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -25,6 +26,18 @@ namespace MenuNamespace
         /// Объект содержащий canvas элементы выбора персонажа 
         /// </summary>
         [FormerlySerializedAs("_selectCharacter")] [SerializeField] private GameObject selectCharacter;
+
+
+        void Start()
+        {
+            // Запускаем музыку
+            DontDestroyOnLoad(GameObject.Find("MusicObjects"));
+            Audio[] audios = { MusicManager.Singleton.Audios["BeerLofi"] };
+            AudioLoop menuAudioLoop = new AudioLoop(audios);
+            menuAudioLoop.Volume = 0.5f;
+            MusicManager.Singleton.AudioLoops["MenuLoop"] = menuAudioLoop;
+            menuAudioLoop.Play();
+        }
         
         /// <summary>
         /// Событие при нажатии кнопки новая игра

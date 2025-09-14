@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace.GameCore;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine;
@@ -22,6 +23,7 @@ namespace MenuNamespace
     public Image characterImage;
     public TextMeshProUGUI characterNameText;
     public Button selectButton;
+    public MenuProxyObject menuProxyObject;
     
     [Header("Animation Settings")]
     public float swipeDuration = 0.3f;
@@ -53,7 +55,8 @@ namespace MenuNamespace
     public void SwipeLeft()
     {
         if (isAnimating) return;
-        
+
+        MusicManager.Singleton.Audios["button"].Play();
         StartCoroutine(AnimateSwipe(-1));
     }
     
@@ -61,6 +64,7 @@ namespace MenuNamespace
     {
         if (isAnimating) return;
 
+        MusicManager.Singleton.Audios["button"].Play();
         StartCoroutine(AnimateSwipe(1));
     }
 
@@ -98,10 +102,8 @@ namespace MenuNamespace
     
     void SelectCharacter()
     {
-        PlayerPrefs.SetInt("SelectedCharacter", currentIndex);
-        Debug.Log("Выбран персонаж: " + characters[currentIndex].characterName);
-        
-        // Здесь можно перейти к следующей сцене или показать подтверждение
+        menuProxyObject.characterPrefab = characters[currentIndex].characterPrefab;
+        StartGame();
     }
     }
 }
