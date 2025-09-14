@@ -142,7 +142,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2987900386372367580}
@@ -160,9 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7057251187d4aaab73c892cfaf37d94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Characters.CarrotCharacter
-  jumpForce: 149
-  jumpDistance: 120
-  jumpCooldown: 0.46
+  walkJumpForce: 149
+  walkJumpDistance: 120
+  jumpPower: 200
 --- !u!212 &2852687656155040269
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -209,7 +209,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 924d762b148d2ef928c640ff77e5dad7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
