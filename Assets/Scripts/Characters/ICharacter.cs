@@ -25,5 +25,11 @@ namespace Characters
         /// Телепортация игрока в точку двери
         /// </summary>
         void Teleport();
+        
+        /// <summary>
+        /// Нанести урон игроку
+        /// </summary>
+        /// <param name="damage">Наносимый игроку урон</param>
+        void Damage(float damage);
     }
 }

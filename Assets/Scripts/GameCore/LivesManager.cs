@@ -34,7 +34,7 @@ namespace GameCore
         /// <summary>
         /// Вызвать при смерти игрока
         /// </summary>
-        void Dead()
+        public void Dead()
         {
             _lives -= 1;
             if (_lives == 0)

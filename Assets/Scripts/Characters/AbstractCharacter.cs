@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using GameCore;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -42,6 +41,11 @@ namespace Characters
         /// Скорость персонажа
         /// </summary>
         public float Speed = 1f;
+
+        /// <summary>
+        /// Количество жизней у игрока
+        /// </summary>
+        private float _health = 1;
 
         void Start()
         {
@@ -97,6 +101,19 @@ namespace Characters
             {
                 _currentTeleporter.Teleport(Rb);
                 _currentTeleporter = null;
+            }
+        }
+
+        /// <summary>
+        /// Нанести урон игроку
+        /// </summary>
+        /// <param name="damage">Наносимый игроку урон</param>
+        public void Damage(float damage)
+        {
+            _health -= damage;
+            if (_health <= 0)
+            {
+                LivesManager.Instance.Dead();
             }
         }
 
