@@ -24,10 +24,18 @@ namespace DefaultNamespace.GameCore
             // Подписываем камеру на персонажа
             _camera.GetComponent<CinemachineCamera>().Follow = Player.Instance.character.transform;
             _camera.GetComponent<CinemachineCamera>().LookAt = Player.Instance.character.transform;
+
+            // Запускаем катсцену
+            StartGame();
             
             // Уничтожаем объекты со сцены, так как он больше не нужен
             Destroy(menuProxyObject);
             Destroy(gameObject);
+        }
+
+        void StartGame()
+        {
+            
         }
     }
 }
