@@ -31,7 +31,8 @@ namespace GameCore
         public enum Keys
         {
             AD,
-            Space
+            Space,
+            T
         }
 
         /// <summary>

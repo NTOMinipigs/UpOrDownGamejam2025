@@ -20,5 +20,10 @@ namespace Characters
         /// Использование способности
         /// </summary>
         void UseAbility();
+        
+        /// <summary>
+        /// Телепортация игрока в точку двери
+        /// </summary>
+        void Teleport();
     }
 }

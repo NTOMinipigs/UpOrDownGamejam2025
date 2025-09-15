@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using GameCore;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -16,17 +17,31 @@ namespace Characters
 
         [FormerlySerializedAs("jumpDistance")] public float walkJumpDistance = 15f; // Дистанция прыжка
 
+        /// <summary>
+        /// Сила прыжка
+        /// </summary>
         public float jumpPower = 200f;
+        
         private bool isGrounded = true;
         /// <summary>
-        /// TODO: написать документацию для этой ебейшей хуйни
+        /// Флаг, указывающий на возможность один раз в прыжке сменить направление
         /// </summary>
         private bool inJump = false;
-
+        
+        /// <summary>
+        /// Текущий телепортер, с которым коллайдится игрокк
+        /// </summary>
+        private Teleporter _currentTeleporter = null;
+        
+        /// <summary>
+        /// Персонаж
+        /// </summary>
         protected Rigidbody2D Rb;
-        protected Sprite BodySprite;
-        protected string CharacterName;
-        protected float Speed = 0.1f;
+        
+        /// <summary>
+        /// Скорость персонажа
+        /// </summary>
+        public float Speed = 1f;
 
         void Start()
         {
@@ -44,6 +59,44 @@ namespace Characters
                 Rb.linearVelocity = Vector2.zero;
                 KeysManager.Instance.AddKey(KeysManager.Keys.Space, "[SPACE] - Прыжок");
                 KeysManager.Instance.AddKey(KeysManager.Keys.AD, "[A, D] - Перемещение влево/вправо");
+            }
+        }
+
+
+        /// <summary>
+        /// Триггер вод
+        /// </summary>
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+                if (collision.gameObject.CompareTag("Teleporter"))
+                {
+                    _currentTeleporter = collision.gameObject.GetComponent<Teleporter>();
+                    KeysManager.Instance.AddKey(KeysManager.Keys.T, "[T] - Зайти в дверь");
+                }
+        }
+
+        /// <summary>
+        /// При выходе из триггера, например из двери
+        /// </summary>
+        /// <param name="other">Коллайдер</param>
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.CompareTag("Teleporter"))
+            {
+                KeysManager.Instance.RemoveKey(KeysManager.Keys.T);
+                _currentTeleporter = null;
+            }
+        }
+
+        /// <summary>
+        /// Телепортировать игрока в другую точку 
+        /// </summary>
+        public void Teleport()
+        {
+            if (_currentTeleporter)
+            {
+                _currentTeleporter.Teleport(Rb);
+                _currentTeleporter = null;
             }
         }
 
@@ -71,7 +124,7 @@ namespace Characters
             if (direction != 00 && isGrounded)
             {
                 // Рассчитываем вектор прыжка
-                Vector2 jumpVector = new Vector2(direction * walkJumpDistance, walkJumpForce);
+                Vector2 jumpVector = new Vector2(direction * walkJumpDistance * Speed, walkJumpForce);
 
                 // Применяем силу прыжка
                 Rb.AddForce(jumpVector, ForceMode2D.Impulse);
@@ -83,7 +136,7 @@ namespace Characters
 
             if (direction != 00 && inJump)
             {
-                Vector2 jumpVector = new Vector2(direction * walkJumpDistance, 0);
+                Vector2 jumpVector = new Vector2(direction * walkJumpDistance * Speed, 0);
                 Rb.AddForce(jumpVector, ForceMode2D.Impulse);
                 inJump = false;
             }
