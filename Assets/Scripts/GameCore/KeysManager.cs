@@ -32,7 +32,8 @@ namespace GameCore
         {
             AD,
             Space,
-            T
+            T,
+            Q
         }
 
         /// <summary>

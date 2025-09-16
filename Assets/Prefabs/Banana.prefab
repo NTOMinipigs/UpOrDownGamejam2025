@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 6940933726787989003}
   - component: {fileID: 4049901988998622728}
   - component: {fileID: -8559679444368733470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Banana
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -164,6 +164,7 @@ MonoBehaviour:
   walkJumpDistance: 80
   jumpPower: 225
   Speed: 1
+  _health: 1
 --- !u!50 &4049901988998622728
 Rigidbody2D:
   serializedVersion: 5

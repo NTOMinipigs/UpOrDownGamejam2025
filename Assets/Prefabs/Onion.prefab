@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3003261034659027114}
   - component: {fileID: 8059041140893033781}
   - component: {fileID: -3573471947052457059}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Onion
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -110,6 +110,7 @@ MonoBehaviour:
   walkJumpDistance: 80
   jumpPower: 225
   Speed: 1
+  _health: 1
 --- !u!50 &8059041140893033781
 Rigidbody2D:
   serializedVersion: 5
@@ -262,7 +263,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 32802ffe3cc97355a8c6658666bfd6fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

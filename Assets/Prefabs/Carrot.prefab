@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 2852687656155040269}
   - component: {fileID: 2130527034988336822}
   - component: {fileID: -602021181867386932}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Carrot
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -164,6 +164,7 @@ MonoBehaviour:
   walkJumpDistance: 80
   jumpPower: 225
   Speed: 1
+  _health: 1
 --- !u!212 &2852687656155040269
 SpriteRenderer:
   m_ObjectHideFlags: 0
