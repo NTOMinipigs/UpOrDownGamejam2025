@@ -45,7 +45,7 @@ namespace Characters
         /// <summary>
         /// Количество жизней у игрока
         /// </summary>
-        private float _health = 1;
+        public float _health = 1;
 
         protected void Start()
         {
@@ -114,6 +114,7 @@ namespace Characters
             if (_health <= 0)
             {
                 LivesManager.Instance.Dead();
+                _health = 1;
             }
         }
 
