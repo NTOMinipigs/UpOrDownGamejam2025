@@ -33,7 +33,8 @@ namespace GameCore
             AD,
             Space,
             T,
-            Q
+            Q,
+            E
         }
 
         /// <summary>
