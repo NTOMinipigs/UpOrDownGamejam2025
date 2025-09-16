@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 6466712426021849360}
   - component: {fileID: 1147501676297205838}
   - component: {fileID: 1278919369928108475}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cockroach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
