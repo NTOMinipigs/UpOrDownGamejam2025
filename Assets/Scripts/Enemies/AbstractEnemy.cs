@@ -142,13 +142,13 @@ namespace Enemies
         {
             // Если нет точки спавна, удалить объект
             if (spawnPoint == null)
-            {
+            {   
                 Destroy(gameObject);
                 return;
             }
             
             // Прооверяем, не находится ли персонаж на текущем месте
-            if (Mathf.Approximately(spawnPoint.position.x, transform.position.x))
+            if (Mathf.Abs(spawnPoint.position.x - transform.position.x) < 1)
             {
                 wantToSpawn = false;
                 return;
