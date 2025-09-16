@@ -78,8 +78,13 @@ public class Audio
     /// Прокси между AudioSource.Stop() и Audio
     /// Нужно для обратной совместимки
     /// </summary>
-    public void Stop()
+    public IEnumerator Stop(bool fadeEffect = false)
     {
+        if (fadeEffect)
+        {
+            yield return FadeEffect(0);
+        }
+
         Source.Stop();
         
         // Ресетаем параметры трека

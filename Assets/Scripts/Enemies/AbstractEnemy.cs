@@ -88,7 +88,7 @@ namespace Enemies
             if (!isChase) return;
             
             // Отменяем погоню, если она идет слишком долго
-            if (Time.time - chaseStartedAt > chaseDuration) isChase = false;
+            if (Time.time - chaseStartedAt > chaseDuration) OnChaseAreaLeaveTrigger();
             
             Walk(Player.Instance.character.transform);
         }
@@ -110,6 +110,15 @@ namespace Enemies
         /// </summary>
         public virtual void VisibilityAreaTrigger()
         {
+
+            AudioLoop gameLoop = MusicManager.Singleton.AudioLoops["GameLoop"];
+            if (gameLoop.CurrentAudio != null && gameLoop.CurrentAudio.Source.isPlaying)
+            {
+                gameLoop.Stop(fadeEffect: true);
+                MusicManager.Singleton.Audios["SnowBeer"].Source.time = 15f;
+                MusicManager.Singleton.AudioLoops["ChaseLoop"].Play();
+            }
+
             chaseStartedAt = Time.time;
             isChase = true;
         }
@@ -121,6 +130,9 @@ namespace Enemies
         {
             isChase = false;
             wantToSpawn = true;
+            
+            MusicManager.Singleton.AudioLoops["ChaseLoop"].Stop(fadeEffect: true);
+            MusicManager.Singleton.AudioLoops["GameLoop"].Play();
         }
 
         /// <summary>

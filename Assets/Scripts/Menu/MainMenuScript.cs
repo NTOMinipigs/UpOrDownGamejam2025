@@ -46,7 +46,6 @@ namespace MenuNamespace
         {
             main.SetActive(false);
             selectCharacter.SetActive(true);
-            
         }
         
         /// <summary>

@@ -187,13 +187,13 @@ public class AudioLoop
     /// <summary>
     /// Полностью остановить loop
     /// </summary>
-    public void Stop()
+    public void Stop(bool fadeEffect = false)
     {
         // Убиваем корутину Play
         MusicManager.Singleton.StopCoroutine(_playExecutorCoroutine);
         _playExecutorCoroutine = null;
         _currentIndex = 0;
-        CurrentAudio.Stop();
+        MusicManager.Singleton.StartCoroutine(CurrentAudio.Stop(fadeEffect));
         CurrentAudio = null;
     }
 

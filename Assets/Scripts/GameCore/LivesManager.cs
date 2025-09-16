@@ -49,6 +49,11 @@ namespace GameCore
             // Телепортируем игрока назад
             StartCoroutine(FadeImage.Instance.FadeScreen());
             Player.Instance.character.transform.position = Vector3.zero;
+            
+            // Меняем музыку
+            MusicManager.Singleton.AudioLoops["ChaseLoop"].Stop(fadeEffect: true);
+            MusicManager.Singleton.AudioLoops["GameLoop"].Play();
+            
         }
     }
 }
