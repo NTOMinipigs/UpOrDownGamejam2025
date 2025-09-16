@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: -8559679444368733470}
   m_Layer: 0
   m_Name: Banana
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,6 +163,7 @@ MonoBehaviour:
   walkJumpForce: 75
   walkJumpDistance: 80
   jumpPower: 225
+  Speed: 1
 --- !u!50 &4049901988998622728
 Rigidbody2D:
   serializedVersion: 5

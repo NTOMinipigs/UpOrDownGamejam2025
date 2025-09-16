@@ -17,128 +17,150 @@ namespace Enemies
         /// Точка спавна врага
         /// </summary>
         [SerializeField] public Transform spawnPoint;
-        
+
         #endregion
-        
-        
+
+
         #region primetive fields
-        
+
         /// <summary>
         /// Урон за один удар по игроку
         /// </summary>
-        float _damage = 1;
+        [SerializeField] protected float damage = 1;
 
         /// <summary>
         /// Скорость персонажа 
         /// </summary>
-        float _speed = 1;
+        [SerializeField] protected float speed = 1;
 
         /// <summary>
         /// Находится ли игрок сейчас в погоне7
         /// </summary>
-        bool _isChase = false;
+        [SerializeField] protected bool isChase = false;
 
         /// <summary>
         /// Когда началась погоня
         /// </summary>
-        float _chaseStartedAt = 0f;
-        
+        [SerializeField] protected float chaseStartedAt = 0f;
+
         /// <summary>
         /// Продолжительность погони
         /// </summary>
-        float _chaseDuration = 15f;
+        [SerializeField] protected float chaseDuration = 15f;
 
         /// <summary>
         /// Нужно к точке спавна
         /// </summary>
-        private bool _wantToSpawn = true;
-        
+        [SerializeField] protected bool wantToSpawn = false;
+
+        /// <summary>
+        /// Задержка между аттаками
+        /// </summary>
+        [SerializeField] protected float attackDelay = 1f;
+
+        /// <summary>
+        /// Время последней атаки
+        /// </summary>
+        [SerializeField] protected float lastAttack = 0f;
+
         #endregion
-        
+
         /// <summary>
         /// Update unity method
         /// </summary>
         void Update()
         {
-            if (_wantToSpawn)
+            if (wantToSpawn)
             {
                 ToSpawnPoint();
             }
-            else if (_isChase)
+            else if (isChase)
             {
                 Chase();
             }
         }
-        
+
         /// <summary>
         /// Действие выполняющееся каждый кадр во время погони
         /// </summary>
-        public void Chase()
+        public virtual void Chase()
         {
+            if (!isChase) return;
+            
             // Отменяем погоню, если она идет слишком долго
-            if (Time.time - _chaseStartedAt > _chaseDuration) _isChase = false;
+            if (Time.time - chaseStartedAt > chaseDuration) isChase = false;
             
-            // Получаем вектор движения
-            Vector3 movement;
-            if (Player.Instance.character.transform.position.x - transform.position.x > 0) {
-                movement = new Vector3(_speed, 0, 0);
-            }
-            else
-            {
-                movement = new Vector3(-_speed, 0, 0);
-            }
-            
-            // Перемещаем
-            transform.Translate(movement, Space.World);
+            Walk(Player.Instance.character.transform);
         }
 
         /// <summary>
         /// Атака на игрока
         /// </summary>
-        public void Attack()
+        public virtual void Attack()
         {
-            Player.Instance.character.GetComponent<AbstractCharacter>().Damage(_damage);
+            if (Time.time - lastAttack > attackDelay)
+            {
+                Player.Instance.character.GetComponent<AbstractCharacter>().Damage(damage);
+                lastAttack = Time.time;
+            }
         }
 
         /// <summary>
         /// Действие выполняющееся при попадании игрока в зону видимости 
         /// </summary>
-        public void VisibilityAreaTrigger()
+        public virtual void VisibilityAreaTrigger()
         {
-            _chaseStartedAt = Time.time;
-            _isChase = true;
+            chaseStartedAt = Time.time;
+            isChase = true;
         }
 
         /// <summary>
         /// При покидании зоны погони
         /// </summary>
-        public void OnChaseAreaLeaveTrigger()
+        public virtual void OnChaseAreaLeaveTrigger()
         {
-            _isChase = false;
-            _wantToSpawn = true;
+            isChase = false;
+            wantToSpawn = true;
         }
 
         /// <summary>
         /// Возвращение на точку спавна
         /// </summary>
-        public void ToSpawnPoint()
+        public virtual void ToSpawnPoint()
         {
-            // Прооверяем, не находится ли персонаж на текущем месте
-            if (Mathf.Approximately(spawnPoint.position.x, transform.position.x)) { 
-                _wantToSpawn=false;
+            // Если нет точки спавна, удалить объект
+            if (spawnPoint == null)
+            {
+                Destroy(gameObject);
                 return;
             }
             
+            // Прооверяем, не находится ли персонаж на текущем месте
+            if (Mathf.Approximately(spawnPoint.position.x, transform.position.x))
+            {
+                wantToSpawn = false;
+                return;
+            }
+            Walk(spawnPoint);
+        }
+
+        /// <summary>
+        /// Метод перемещения персонажа
+        /// </summary>
+        /// <param name="pointTransform">место в которое стремится персонаж</param>
+        protected virtual void Walk(Transform pointTransform)
+        {
             // Получаем вектор движения
             Vector3 movement;
-            if (spawnPoint.position.x - transform.position.x > 0) {
-                movement = new Vector3(_speed, 0, 0);
+            if (pointTransform.position.x - transform.position.x > 0)
+            {
+                movement = new Vector3(speed, 0, 0);
             }
             else
             {
-                movement = new Vector3(-_speed, 0, 0);
+                movement = new Vector3(-speed, 0, 0);
             }
-            
+
             // Перемещаем
             transform.Translate(movement, Space.World);
         }

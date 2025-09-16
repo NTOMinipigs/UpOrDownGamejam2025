@@ -47,7 +47,7 @@ namespace Characters
         /// </summary>
         private float _health = 1;
 
-        void Start()
+        protected void Start()
         {
             Rb = GetComponent<Rigidbody2D>();
             KeysManager.Instance.AddKey(KeysManager.Keys.Space, "[SPACE] - Прыжок");

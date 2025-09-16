@@ -6,9 +6,9 @@ namespace Characters
     {
         void Start()
         {
-            Rb = GetComponent<Rigidbody2D>();    
+            base.Start();
         }
-        
+
         public override void UseAbility()
         {
             throw new System.NotImplementedException();

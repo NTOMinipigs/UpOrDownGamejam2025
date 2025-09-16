@@ -6,9 +6,9 @@ namespace Characters
     {
         void Start()
         {
-            SetRigidbody();
+            base.Start();
         }
-        
+
         public override void UseAbility()
         {
             throw new System.NotImplementedException();
