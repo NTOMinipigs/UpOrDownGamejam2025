@@ -141,6 +141,15 @@ namespace Characters
 
             if (direction != 00 && isGrounded)
             {
+                if (direction > 0)
+                {
+                    gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+                else
+                {
+                    gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+                }
+                
                 // Рассчитываем вектор прыжка
                 Vector2 jumpVector = new Vector2(direction * walkJumpDistance * Speed, walkJumpForce);
 
