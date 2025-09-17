@@ -1,5 +1,6 @@
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameCore
 {
@@ -39,7 +40,8 @@ namespace GameCore
             _lives -= 1;
             if (_lives == 0)
             {
-                // TODO: Реализовать конец игры
+                EndingProxyObject.Instance.endingType = EndingProxyObject.EndingType.Bad;
+                SceneManager.LoadScene("Ending");
             }
 
             // Удаляем жизни из UI
@@ -52,8 +54,6 @@ namespace GameCore
             
             // Меняем музыку
             MusicManager.Singleton.AudioLoops["ChaseLoop"].Stop(fadeEffect: true);
-            MusicManager.Singleton.AudioLoops["GameLoop"].Play();
-            
         }
     }
 }

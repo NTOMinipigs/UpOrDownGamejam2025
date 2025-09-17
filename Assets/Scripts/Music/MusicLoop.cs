@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,18 +14,18 @@ public class AudioLoop
     /// Текущий трек
     /// НЕ МЕНЯТЬ МОДИФИКАТОРЫ!
     /// </summary>
-    public Audio CurrentAudio {get; private set; }
+    public Audio CurrentAudio { get; private set; }
 
     /// <summary>
     /// Громкость треков в цикле
     /// </summary>
     public float Volume;
-    
+
     /// <summary>
     /// Использовать ли FadeEffect
     /// </summary>
     public readonly bool FadeEffect;
-    
+
     /// <summary>
     /// Запускать треки в случайном порядке?
     /// </summary>
@@ -46,13 +45,13 @@ public class AudioLoop
     /// Индекс текущего трека в массиве
     /// </summary>
     private byte _currentIndex;
-    
+
     /// <summary>
     /// Список треков для воиспроизведения
     /// НЕ СТОИТ делать публичным. Может быть опасно для цикла
     /// </summary>
     private Audio[] _audios;
-    
+
     /// <summary>
     /// Здесь будет храниться корутина PlayExecutor, в момент, когда цикл запущен
     /// Использовать для возможности остановить корутину
@@ -68,7 +67,7 @@ public class AudioLoop
     /// <param name="randomize">Включать треки в случайном порядке? non req</param>
     /// <param name="playOnce">Проиграть цикл один раз, см. док this.PlayOnce</param>
     public AudioLoop(
-        Audio[] audioSources, 
+        Audio[] audioSources,
         float volume = 1.0f,
         bool fadeEffect = false,
         bool randomize = false,
@@ -91,11 +90,11 @@ public class AudioLoop
             // Поставьте сюда какую-то более "говорящую" ошибку
             throw new Exception("Цикл уже запущен");
         }
-        
+
         // Записываем корутину в филд, и отправляем исполняться
         _playExecutorCoroutine = MusicManager.Singleton.StartCoroutine(PlayExecutor());
     }
-    
+
     /// <summary>
     /// ДОСТАТОЧНО НЕОЧЕВИДНЫЙ МОМЕНТ
     /// Этот участок кода вынесен в отдельный метод, так как мне нужно сохранять объект корутины Play()
@@ -107,28 +106,28 @@ public class AudioLoop
     private IEnumerator PlayExecutor()
     {
         SetNewAudio();
-        
+
         // Цикл не бесконечный, он умрет как только я использую StopCoroutine()
         while (true)
         {
             // Ставим громкость на указанную в конструкторе
             CurrentAudio.Source.volume = Volume;
-            
+
             // Запускаем трек с фейдом/без фейда
             if (FadeEffect)
             {
                 // Запустим первый трек и начнем дожидаться фейд эффекта в конце
                 MusicManager.Singleton.StartCoroutine(CurrentAudio.PlayWithFadeEffect());
-                yield return new WaitForSeconds(CurrentAudio.Source.clip.length - _fadeEffectLength); 
+                yield return new WaitForSeconds(CurrentAudio.Source.clip.length - _fadeEffectLength);
             }
-            
+
             // Иначе запускаем трек без фейд эффекта
             else
             {
                 CurrentAudio.Play();
                 yield return new WaitForSeconds(CurrentAudio.Source.clip.length);
             }
-            
+
             CurrentAudio.Source.volume = 1.0f; // Возвращаем в стандартное положение, на всякий
             SetNewAudio();
         }
@@ -144,11 +143,11 @@ public class AudioLoop
         {
             int number;
             do
-            { 
+            {
                 number = Random.Range(0, _audios.Length - 1); // Генерируем случайный индекс
             } while (number == _currentIndex); // Проверяем, чтобы индекс не был равен предыдущему
-            
-            _currentIndex = (byte) number;
+
+            _currentIndex = (byte)number;
             CurrentAudio = _audios[_currentIndex];
         }
 
@@ -161,7 +160,7 @@ public class AudioLoop
                 CurrentAudio = _audios[_currentIndex];
                 return;
             }
-            
+
             // Если плейлист закончился, начать заново 
             // Или если PlayOnce = true, остановить проигрывание
             if (_currentIndex == _audios.Length - 1)
@@ -172,12 +171,12 @@ public class AudioLoop
                     MusicManager.Singleton.StopCoroutine(_playExecutorCoroutine);
                     return;
                 }
-                
+
                 _currentIndex = 0;
                 CurrentAudio = _audios[_currentIndex];
                 return;
             }
-            
+
             // Иначе идти дальше по трекам
             _currentIndex++;
             CurrentAudio = _audios[_currentIndex];
@@ -190,10 +189,18 @@ public class AudioLoop
     public void Stop(bool fadeEffect = false)
     {
         // Убиваем корутину Play
-        MusicManager.Singleton.StopCoroutine(_playExecutorCoroutine);
+        if (_playExecutorCoroutine != null)
+        {
+            MusicManager.Singleton.StopCoroutine(_playExecutorCoroutine);
+        }
+
         _playExecutorCoroutine = null;
         _currentIndex = 0;
-        MusicManager.Singleton.StartCoroutine(CurrentAudio.Stop(fadeEffect));
+        if (CurrentAudio != null)
+        {
+            MusicManager.Singleton.StartCoroutine(CurrentAudio.Stop(fadeEffect));
+        }
+
         CurrentAudio = null;
     }
 
@@ -203,11 +210,15 @@ public class AudioLoop
     public void Pause()
     {
         // Убиваем корутину Play
-        MusicManager.Singleton.StopCoroutine(_playExecutorCoroutine);
+        if (_playExecutorCoroutine != null)
+        {
+            MusicManager.Singleton.StopCoroutine(_playExecutorCoroutine);
+        }
+
         _playExecutorCoroutine = null;
         CurrentAudio.Pause();
     }
-    
+
     /// <summary>
     /// Возобновить работу плейлиста после паузы
     /// Корутина, желательно бы сделать void, но лень
@@ -215,7 +226,8 @@ public class AudioLoop
     public IEnumerator Resume()
     {
         CurrentAudio.Resume();
-        yield return new WaitForSeconds(CurrentAudio.Source.clip.length - CurrentAudio.Source.time); // Ждем конца текущего трека
+        yield return
+            new WaitForSeconds(CurrentAudio.Source.clip.length - CurrentAudio.Source.time); // Ждем конца текущего трека
         MusicManager.Singleton.StartCoroutine(PlayExecutor());
     }
 }
