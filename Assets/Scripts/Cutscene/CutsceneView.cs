@@ -14,6 +14,7 @@ namespace Cutscene
     /// </summary>
     public class CutsceneView : MonoBehaviour
     {
+        // TODO: Сделать нормальную документацию 
         
         /// <summary>
         /// Singleton

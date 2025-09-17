@@ -1,3 +1,4 @@
+using Cutscene;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ namespace DefaultNamespace.GameCore
             
             // Ставим персонажа игроку
             Player.Instance.character =
-                Instantiate(menuProxyObject.characterPrefab, new Vector2(0, 0), Quaternion.identity);
+                Instantiate(menuProxyObject.characterPrefab, new Vector2(-50, 0), Quaternion.identity);
 
             // Подписываем камеру на персонажа
             _camera.GetComponent<CinemachineCamera>().Follow = Player.Instance.character.transform;
@@ -42,6 +43,7 @@ namespace DefaultNamespace.GameCore
         void StartGame()
         {
             MusicManager.Singleton.AudioLoops["GameLoop"].Play();
+            CutsceneManager.Singleton.StartCutscene(CutsceneManager.Singleton.FirstCutscene);
         }
 
         void InitAudios()
