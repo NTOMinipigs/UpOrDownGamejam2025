@@ -34,7 +34,8 @@ namespace GameCore
             Space,
             T,
             Q,
-            E
+            E,
+            C
         }
 
         /// <summary>
