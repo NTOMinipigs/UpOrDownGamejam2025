@@ -17,7 +17,7 @@ namespace Enemies
 
         [SerializeField] private Sprite[] _walkSprites;
         [SerializeField] private Sprite _staySprite;
-        
+
         #endregion
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Enemies
         /// Задержка между сменой спрайтов
         /// </summary>
         [SerializeField] private float _spriteDuration = 0.2f;
-        
+
         /// <summary>
         /// Последняя смена спрайта
         /// </summary>
@@ -45,14 +45,14 @@ namespace Enemies
             _spriteRenderer.sprite = _staySprite;
             _currentWalkSpriteIndex = 0;
         }
-        
+
         /// <summary>
         /// Возвращение на точку спавна
         /// </summary>
         public override void ToSpawnPoint()
         {
             base.ToSpawnPoint();
-            
+
             // Если персонажу никуда не надо - ставим его прямо
             if (!wantToSpawn)
             {
@@ -60,7 +60,7 @@ namespace Enemies
                 _currentWalkSpriteIndex = 0;
             }
         }
-        
+
         /// <summary>
         /// Метод перемещения персонажа
         /// </summary>
@@ -81,12 +81,30 @@ namespace Enemies
 
             // Если спрайт менять рано
             if (Time.time - _lastSpriteChange < _spriteDuration) return;
-            
+
             // Воиспрозводим анимацию ходьбы
             _spriteRenderer.sprite = _walkSprites[_currentWalkSpriteIndex];
             if (_currentWalkSpriteIndex == _walkSprites.Length - 1) _currentWalkSpriteIndex = 0;
             else _currentWalkSpriteIndex++;
             _lastSpriteChange = Time.time;
+        }
+
+        /// <summary>
+        /// Возвращает wantToSpawn 
+        /// </summary>
+        public bool WantToSpawn
+        {
+            get => wantToSpawn;
+            set => wantToSpawn = value;
+        }
+
+        /// <summary>
+        /// Геттер-сеттер для спавнпоинта
+        /// </summary>
+        public Transform SpawnPoint
+        {
+            get => spawnPoint;
+            set => spawnPoint = value;
         }
     }
 }
