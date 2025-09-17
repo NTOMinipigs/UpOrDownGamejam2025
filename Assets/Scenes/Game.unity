@@ -2900,6 +2900,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Astronaut
       objectReference: {fileID: 0}
+    - target: {fileID: 3337721644946304129, guid: df80faf9753fcb8928399f3b45d00a80, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 4488836920593476812, guid: df80faf9753fcb8928399f3b45d00a80, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1016

@@ -34,6 +34,7 @@ namespace Distressed
         /// <param name="other">Обязательный аргумент</param>
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (!other.CompareTag("Character")) return;
             // Добавляем кнопку
             KeysManager.Instance.AddKey(KeysManager.Keys.Q, "[Q] Подобрать пострадавшего");
             canBePickedUp = true;
@@ -45,6 +46,7 @@ namespace Distressed
         /// <param name="other">Обязательный аргумент</param>
         private void OnTriggerExit2D(Collider2D other) 
         {
+            if (!other.CompareTag("Character")) return;
             KeysManager.Instance.RemoveKey(KeysManager.Keys.Q);
             canBePickedUp = false;
         }
