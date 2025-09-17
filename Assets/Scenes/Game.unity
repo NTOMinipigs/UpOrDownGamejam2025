@@ -4183,9 +4183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d1cfe5fc1c41fcbc0964fd5ca3a5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameCore.AstronautScript
-  astronaut: {fileID: 0}
-  firstPoint: {fileID: 0}
-  secondPoint: {fileID: 0}
+  astronaut: {fileID: 1083243123}
+  firstPoint: {fileID: 1299206022}
+  secondPoint: {fileID: 1358724739}
 --- !u!1 &1439483933
 GameObject:
   m_ObjectHideFlags: 0
