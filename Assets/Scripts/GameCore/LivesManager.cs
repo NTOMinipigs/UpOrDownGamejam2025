@@ -26,6 +26,8 @@ namespace GameCore
         /// Количество оставшихся жизней
         /// </summary>
         private int _lives = 3;
+        
+        public int Lives => _lives;
 
         void Start()
         {

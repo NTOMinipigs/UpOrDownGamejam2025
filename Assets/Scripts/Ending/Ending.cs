@@ -57,7 +57,16 @@ namespace DefaultNamespace.Ending
 
             goodEnding.SetActive(true);
             distressedCount.text = _endingProxyObject.distressedCount.ToString();
-            time.text = (Time.time - _endingProxyObject.gameStartedAt).ToString("0.00");
+            
+            // Рассчитываем время
+            float timeInSeconds = Time.time - _endingProxyObject.gameStartedAt;
+            int minutes = (int) (timeInSeconds / 60);
+            int seconds = (int) (timeInSeconds % 60);
+
+            time.text = minutes + ":" + seconds;
+            if (minutes < 10) time.text = "0" + time.text;
+            if (seconds < 10) time.text = time.text + "0";
+            
             // Убираем сердца
             for (int i = 0; i < 3 - _endingProxyObject.lives; i++)
                 lives.transform.GetChild(i).gameObject.SetActive(false);

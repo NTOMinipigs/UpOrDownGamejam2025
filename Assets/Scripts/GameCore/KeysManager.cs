@@ -35,7 +35,10 @@ namespace GameCore
             T,
             Q,
             E,
-            C
+            C,
+            R,
+            Tab,
+            WS
         }
 
         /// <summary>

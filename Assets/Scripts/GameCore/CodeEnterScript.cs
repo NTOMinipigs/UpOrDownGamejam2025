@@ -1,4 +1,5 @@
 using System.Collections;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,7 +40,10 @@ namespace GameCore
             
             if (code.Trim() == realCode)
             {
-                // TODO: Загрузить сцену
+                EndingProxyObject.Instance.endingType = EndingProxyObject.EndingType.Good;
+                EndingProxyObject.Instance.gameStartedAt = Time.time;
+                EndingProxyObject.Instance.distressedCount = DistressedManager.Instance.count;
+                EndingProxyObject.Instance.lives = LivesManager.Instance.Lives;
                 SceneManager.LoadScene("Ending");
             }
             else

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GameCore
 {
@@ -23,7 +24,7 @@ namespace GameCore
         /// <summary>
         /// Количество реально спасенных овощей
         /// </summary>
-        private int _count = 0;
+        public int count = 0;
 
         void Start()
         {
@@ -35,8 +36,8 @@ namespace GameCore
         /// </summary>
         public void AddDistressed()
         {
-            _count++;
-            TextField.text = _count.ToString();
+            count++;
+            TextField.text = count.ToString();
         }
     }
 }
