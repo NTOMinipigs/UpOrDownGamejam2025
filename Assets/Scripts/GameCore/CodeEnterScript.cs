@@ -13,14 +13,23 @@ namespace GameCore
     public class CodeEnterScript : MonoBehaviour
     {
 
+        public static CodeEnterScript Instance { private set; get; }
+        
         [SerializeField] private GameObject warning;
-        [SerializeField] private GameObject codeInputMenu;
+        [SerializeField] public GameObject codeInputMenu;
         [SerializeField] private TextMeshProUGUI inputField;
         
         /// <summary>
         /// Правильный код
         /// </summary>
         private const string realCode = "4019​";
+
+        void Start()
+        {
+            Instance = this;
+            codeInputMenu.SetActive(false);
+            warning.SetActive(false);
+        }
         
         void Update()
         {

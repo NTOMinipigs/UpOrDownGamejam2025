@@ -111,6 +111,7 @@ namespace Characters
         public void Damage(float damage)
         {
             _health -= damage;
+            StartCoroutine(DamageVingette.Instance.FadeScreen());
             if (_health <= 0)
             {
                 LivesManager.Instance.Dead();
@@ -163,7 +164,7 @@ namespace Characters
 
             if (direction != 00 && inJump)
             {
-                Vector2 jumpVector = new Vector2(direction * walkJumpDistance * Speed, 0);
+                Vector2 jumpVector = new Vector2(direction * walkJumpDistance * Speed * 1.5f, 0);
                 Rb.AddForce(jumpVector, ForceMode2D.Impulse);
                 inJump = false;
             }

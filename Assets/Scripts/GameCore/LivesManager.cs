@@ -54,6 +54,9 @@ namespace GameCore
             StartCoroutine(FadeImage.Instance.FadeScreen());
             Player.Instance.character.transform.position = Vector3.zero;
             
+            // Закрываем меню ввода кода
+            CodeEnterScript.Instance.codeInputMenu.SetActive(false);
+            
             // Меняем музыку
             MusicManager.Singleton.AudioLoops["ChaseLoop"].Stop(fadeEffect: true);
         }

@@ -32,8 +32,8 @@ namespace DefaultNamespace.Cameras
                 KeysManager.Instance.RemoveKey(KeysManager.Keys.WS);
             }
             
-            if (Input.GetKeyDown(KeyCode.W) && Player.Instance.cameraDisplay) NextCamera(-1);
-            if (Input.GetKeyDown(KeyCode.S) && Player.Instance.cameraDisplay) NextCamera(1);
+            if (Input.GetKeyDown(KeyCode.W) && Player.Instance.cameraDisplay && _display.activeSelf) NextCamera(-1);
+            if (Input.GetKeyDown(KeyCode.S) && Player.Instance.cameraDisplay && _display.activeSelf) NextCamera(1);
         }
 
         public void NextCamera(int direction)
