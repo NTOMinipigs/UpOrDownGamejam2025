@@ -68,7 +68,7 @@ namespace Enemies
         /// <summary>
         /// Update unity method
         /// </summary>
-        void Update()
+        void FixedUpdate()
         {
             if (wantToSpawn)
             {
@@ -166,11 +166,11 @@ namespace Enemies
             Vector3 movement;
             if (pointTransform.position.x - transform.position.x > 0)
             {
-                movement = new Vector3(speed, 0, 0);
+                movement = new Vector3(speed, 0, 0) * Time.deltaTime;
             }
             else
             {
-                movement = new Vector3(-speed, 0, 0);
+                movement = new Vector3(-speed, 0, 0) * Time.deltaTime;
             }
 
             // Перемещаем

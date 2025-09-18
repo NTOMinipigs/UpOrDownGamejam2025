@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemies.CockroachEnemy
   spawnPoint: {fileID: 0}
   damage: 0.1
-  speed: 0.5
+  speed: 20
   isChase: 0
   chaseStartedAt: 0
   chaseDuration: 15
